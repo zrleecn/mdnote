@@ -406,3 +406,42 @@ df['score'] = df['score'].fillna(df['score'].mean())
 print(df)
 ```
 
+## pandas常用的统计方法
+
+```python
+mean() 平均值
+tolist() 转换成列表
+max() 最大值
+min() 最小值
+median() 中值
+```
+
+
+
+```python
+import pandas as pd
+import numpy as np
+dic = [
+	{"name":"zrlee", "score":80 , "gender":"男"},
+	{"name":"marry", "score":75, "gender":"女"},
+	{"name":"tom", "score":83, "gender":"男"},
+	{"name":"sally", "score":78, "gender":"男"},
+	{"name":"aaa", "score":np.nan, "gender":"男"},
+
+]
+
+df = pd.DataFrame(dic, index=list("abcde"))
+
+print(df.info())
+# 获取平均分数
+print(df['score'].mean())
+# 获取人数
+print(len(set(df['name'])))
+print(len(df['name'].unique())) # 名字唯一
+
+# 最大值
+print(df["score"].max())
+print(df["score"].median())
+# print(df["name"].str.split(",").tolist())
+```
+
