@@ -122,20 +122,25 @@ bar函数完成条形图的绘制
 ​    from matplotlib import pyplot as plt
 
 ```python
+from matplotlib import pyplot as plt
+import random
+from matplotlib import font_manager
 # 构建数据
 gdp = [12406.8,13908.57,9386.87,9143.64]
 citys = ['北京市', '上海市', '天津市', '重庆市']
 # 中文乱码处理
-plt.rcParams['font.sans-serif'] = ['simhei']
+plt.rcParams['font.sans-serif']=['SimHei'] 
+plt.rcParams['font.family']='sans-serif' 
+font = font_manager.FontProperties(fname='/usr/share/fonts/opentype/noto/NotoSansCJK-Medium.ttc')
 
 # 绘图
 plt.bar(range(len(gdp)), gdp, align='center',width=0.8, color='cyan', alpha=0.8)
 
 # 添加标签
-plt.xlabel('城市')
+plt.xlabel('城市', fontproperties=font)
 plt.ylabel('GDP')
 # 添加刻度
-plt.xticks(range(len(gdp)), citys )
+plt.xticks(range(len(gdp)), citys , fontproperties=font)
 
 # 设置y轴的刻度范围
 plt.ylim([5000, 15000])
@@ -143,6 +148,7 @@ plt.ylim([5000, 15000])
 for i in range(len(gdp)):
     plt.text(i, gdp[i]+100, str(round(gdp[i], 1)), ha='center' )
 plt.plot()
+plt.show()
 ```
 
 ![](http://libs.zrlee.cn/image/2dc2c910-df26-11e8-9f32-f2801f1b9fd1.png)
