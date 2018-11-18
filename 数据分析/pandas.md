@@ -445,3 +445,56 @@ print(df["score"].median())
 # print(df["name"].str.split(",").tolist())
 ```
 
+### 字符串离散化例子
+
+```python
+from matplotlib import pyplot as plt
+import numpy as np
+import pandas as pd
+import random
+from matplotlib import font_manager
+
+font = font_manager.FontProperties(fname='/usr/share/fonts/opentype/noto/NotoSansCJK-Medium.ttc')
+
+df = pd.read_csv("./data.csv")
+print(df.info())
+
+temp_list = df['types'].str.split("/").tolist()  # [ [], [], []]
+# 去掉空元素
+for i in range(len(temp_list)):
+    temp_list[i].remove('')
+
+# 分类去重
+cate_list = list(set([i for j in temp_list for i in j]))
+print(cate_list)
+print(len(cate_list))
+
+# 构造全0数组
+zeros_df = pd.DataFrame(np.zeros((df.shape[0], len(cate_list))), columns=cate_list)
+
+for i in range(zeros_df.shape[0]):
+
+    # zeros_df.loc[i, ['冒险', '家庭']]] =1 选中的赋值为1
+    zeros_df.loc[i, temp_list[i]] = 1
+
+
+# 统计每一分类
+count_info = zeros_df.sum(axis=0)
+cate_name = count_info.index
+cate_count = count_info.values
+print(count_info)
+# 画图
+plt.figure(figsize=(20,10), dpi=80)
+plt.bar(range(len(cate_name)), cate_count)
+
+plt.xticks(range(len(cate_name)), cate_name, fontproperties=font)
+
+# 添加数值标签
+for i in range(len(cate_name)):
+    plt.text(i, cate_count[i]+2, str(cate_count[i]), ha="center")
+plt.show()
+
+```
+
+附上csv的地址https://gitee.com/zrlee/doubanspider2csv/blob/master/douban/spiders/douban.csv
+
