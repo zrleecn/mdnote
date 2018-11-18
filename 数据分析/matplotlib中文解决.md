@@ -35,3 +35,10 @@ font = font_manager.FontProperties(fname='/usr/share/fonts/opentype/noto/NotoSan
 plt.xlabel('城市', fontproperties=font)
 ```
 
+## windows 上
+
+```python
+plt.rcParams['font.sans-serif']=['SimHei'] #用来正常显示中文标签
+plt.rcParams['axes.unicode_minus']=False #用来正常显示负号
+```
+
