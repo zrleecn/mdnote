@@ -292,8 +292,6 @@ df["name"] = df["name"].str.upper()
 print(df)
  ```
 
-###
-
 ## pandas 获取外部数据
 
 ### 从csv文本中读取
@@ -469,7 +467,7 @@ cate_list = list(set([i for j in temp_list for i in j]))
 print(cate_list)
 print(len(cate_list))
 
-# 构造全0数组
+# 构造全0数组, 列索引为分类名称
 zeros_df = pd.DataFrame(np.zeros((df.shape[0], len(cate_list))), columns=cate_list)
 
 for i in range(zeros_df.shape[0]):
